@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<style>
+input.ng-invalid {
+    background-color: lightblue;
+}
+</style>
+<body ng-app="myApp">
+
+<p>The rootScope's favorite color:</p>
+<h1>{{color}}</h1>
+
+<div ng-controller="myCtrl" w3-test-directive>
+  url : {{myUrl}} <br>
+  First name: <input type="text" ng-model="firstName"><br>
+  Last name: <input type="text" ng-model="lastName"><br>
+  Box color: <input style="background-color:{{myCol}}" ng-model="myCol"><br>
+  <br>
+  Full Name: {{firstName + " " + lastName}}
+  <br>
+  <ul>
+    <li ng-repeat="x in nameArr">
+      {{ x.fName + " " + x.lName }}
+    </li>
+  </ul>
+  <br>
+  <div class="test-directive"></div>
+  <form name="myForm">
+    Email:
+    <input type="email" name="myAddress" ng-model="formText">
+    <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
+    <h1>Status</h1>
+    {{myForm.myAddress.$valid}}
+    {{myForm.myAddress.$dirty}}
+    {{myForm.myAddress.$touched}}
+  </form>
+  <p>The scope of the controller's favorite color:</p>
+  <h1>{{color}}</h1>
+  <br>
+  <h1 ng-click='loadData()'>Click to load data</h1>
+  <div ng-show="loaded">
+    <table>
+      <tr ng-repeat="x in myHTTPtest">
+        <td>{{ $index + 1 }}</td>
+        <td>{{ x.Name }}</td>
+        <td>{{ x.City }}</td>
+        <td>{{ x.Country }}</td>
+      </tr>
+    </table>
+
+    <p>Select a person:</p>
+    <select ng-model="selectedPerson" ng-options="x.Name for x in myHTTPtest">
+    </select>
+    <h1>You selected: {{selectedPerson.Name}}</h1>
+    <p>Its City is: {{selectedPerson.City}}</p>
+    <p>Its Country is: {{selectedPerson.Country}}</p>
+  </div>
+
+  <br>
+  <p>Status : {{statuscode}}</p>
+  <p>StatusText : {{statustext}}</p>
+  <br>
+  {{aux}}
+</div>
+
+<script src="myApp.js"></script>
+<script src="myCtrl.js"></script>
+<script src="myDir.js"></script>
+<script src="myServ.js"></script>
+
+</body>
+</html>
